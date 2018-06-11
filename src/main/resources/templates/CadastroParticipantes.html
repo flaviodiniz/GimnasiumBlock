@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Participantes</title>
+</head>
+<section layout:fragment="conteudo">
+    <form class="form-horizontal" method="POST" th:action="@{/requerimentos/participantes}" th:object="${participante}">
+    	<div class="alert alert-success" role="alert"> Requerimento solicitado! Complemente o preenchimento!</div>
+    	
+    	<div class="panel panel-default">
+    		<div class="panel-heading">
+    			<div class="clearfix">
+	   				<h1 class="panel-title titulo-right">Adicionar participantes
+						para utilização do ginásio</h1>
+	   				<a class="btn btn-link link-right"
+						th:href="@{/requerimentos/inicio}">Voltar para o ínicio</a>
+	   			</div>
+    		</div>
+    		
+    		<div class="panel-body">
+    		
+    		<div class="table-responsive">
+    			<small id="requerimentoHelp" class="form-text text-muted">Requerimento Solicitado!</small>
+				<table class="table table-bordered table-striped" id="tabela-requerimento">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th class="text-center col-md-2">Nome do Responsavel</th>
+							<th class="text-center col-md-2">Descrição:</th>
+							<th class="text-center col-md-2">Modalidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="requerimento : ${requerimentos}">
+							<td class="text-center" th:text="${requerimento.codigo}">1</td>
+							<td th:text="${requerimento.nome}"></td>
+							<td class="text-center" th:text="${{requerimento.descricao}}"></td>	
+							<td class="text-center" th:text="${{requerimento.modalidade}}"></td>			
+						</tr>
+					
+					</tbody>
+				</table>
+			</div>
+    		 			
+			<div class="table-responsive">
+				<small id="tableHelp" class="form-text text-muted">Participantes adicionados!</small>
+				<table class="table table-bordered table-striped" id="tabela-participantes">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th>Nome</th>
+							<th class="text-center col-md-2">RG:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="participante : ${participantes}">
+							<td class="text-center" th:text="${participante.id}">1</td>
+							<td th:text="${participante.nome}"></td>
+							<td class="text-center" th:text="${{participante.rg}}"></td>			
+						</tr>
+					
+					</tbody>
+				</table>
+			</div>	
+		    
+    		<div class="panel-body">
+				<div class="form-group">
+					<label for="nome" class="col-sm-2 control-label">Nome:</label>
+					<div class="col-sm-4"> 
+						<input type="text" class="form-control" id="nome" name="nome"/>
+						<small id="nomeHelp" class="form-text text-muted">Digite o nome completo!</small>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="rg" class="col-sm-2 control-label">RG:</label>
+					<div class="col-sm-2">  
+						<input type="text" class="form-control rg"	id="rg" name="rg"/>
+						<small id="rgHelp" class="form-text text-muted">Apenas números!</small>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary" id="submeter">Submeter</button>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<a class="btn btn-primary" th:href="@{/requerimentos/horarios}">Continuar</a>
+						<small id="rgHelp" class="form-text text-muted">Ir para escolha do horário!</small>
+					</div>
+				</div>
+
+				<nav aria-label="...">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link">1</a></li>
+						<li class="page-item active"><span class="page-link">2
+						</span></li>
+						<li class="page-item"><a class="page-link">3</a></li>
+					</ul>
+				</nav>
+							
+			</div>	
+			</div>
+    	</div>
+    </form>
+</section>
+
+</html>

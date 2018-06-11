@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Horários</title>
+
+</head>
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST"
+		th:action="@{/requerimentos/horarios}"
+		th:object="${horario}">
+		 <div class="alert alert-danger" th:if="${errors}" th:text="${message}"></div>
+		<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+			<div th:each="detailedError : ${#fields.detailedErrors()}">
+				<span th:text="${detailedError.message}"></span>
+			</div>
+		</div> 
+		
+	
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title titulo-right">Escolha do Horário</h1>
+						<a class="btn btn-link link-right"
+						th:href="@{/requerimentos/inicio}">Voltar para o ínicio</a>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				<small id="rgHelp" class="form-text text-muted">Verifique a disponibilidade do horário!</small>
+				<div class="form-group">
+					<label for="diaDaSemana" class="col-sm-2 control-label">Dia
+						da Semana:</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="diaDaSemana" id="{diaDaSemana}" th:field="*{diaDaSemana}">
+							<option th:each="diaDaSemana : ${diasDaSemana}"
+								th:value="${diaDaSemana}" th:text="${diaDaSemana.descricao}"></option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="hora" class="col-sm-2 control-label">Horario:</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="hora" id="{hora}" th:field="*{hora}">
+							<option th:each="hora : ${horas}"
+								th:value="${hora}" th:text="${hora.descricao}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary" id="submeter">Salvar</button>
+					</div>
+				</div>
+
+				<nav aria-label="...">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link">1</a></li>
+						<li class="page-item"><span class="page-link">2 </span></li>
+						<li class="page-item active"><a class="page-link">3</a></li>
+					</ul>
+				</nav>
+
+			</div>
+
+			<div class="panel-body">
+				<small id="horaHelp" class="form-text text-muted">Dias e Horas que estão sendo utilizadas!</small>
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th class="text-center col-md-1">Dia da Semana</th>
+							<th class="text-center col-md-1">Horário</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr th:each="horario : ${horarios}">
+							<td class="text-center" th:text="${horario.codigo}">1</td>
+							<td th:text="${horario.diaDaSemana}"></td>
+							<td class="text-center" th:text="${horario.hora.descricao}"></td>			
+						</tr>  
+
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</form>
+</section>
+</html>

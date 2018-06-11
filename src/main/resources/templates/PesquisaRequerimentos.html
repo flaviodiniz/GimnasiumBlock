@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Pesquisa de Títulos</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<div layout:include="MensagemGeral"></div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title titulo-right">Pesquisa de Requerimentos</h1>
+				<a class="btn btn-link link-right" th:href="@{/requerimentos/inicio}">Voltar para o início</a>
+			</div>
+		</div>
+
+		<div class="panel-body">
+
+			<form method="GET" class="form-horizontal" th:action="@{/requerimentos}"
+				th:object="${filtro}">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input class="form-control" placeholder="Pesquisar um requerimento?"
+								autofocus="autofocus" th:field="*{descricao}"></input> <span
+								class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div class="table-responsive">
+
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center col-md-1">#</th>
+							<th class="text-center">Decrição</th>
+							<th class="text-center col-md-2">Data de solicitação</th>
+							<th class="text-center col-md-2">Nome</th>
+							<th class="text-center col-md-2">Status</th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="requerimento : ${requerimentos}">
+							<td class="text-center" th:text="${requerimento.codigo}">1</td>
+							<td th:text="${requerimento.descricao}"></td>
+							<td class="text-center" th:text="${{requerimento.dataCadastro}}"></td>
+							<td class="text-center" th:text="${{requerimento.nome}}"></td>
+							<td class="text-center" th:attr="data-role=${requerimento.codigo}">
+								<span class="label" th:text="${requerimento.status}"
+								th:classappend="${requerimento.indeferido ? 'label-danger' : 'label-success'}" ></span>
+							</td>
+							<td class="text-center">
+								<a class="btn btn-link btn-xs" th:href="@{/requerimentos/{codigo}(codigo=${requerimento.codigo})}"
+								title="Editar" rel="tooltip" data-placement="top"> 
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a> 
+								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
+								th:attr="data-codigo=${requerimento.codigo}, data-descricao=${requerimento.descricao}"
+								title="Excluir" rel="tooltip" data-placement="top">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a> 
+								
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" th:if="${#lists.isEmpty(requerimentos)}">Nenhum
+								título foi encontrado</td>
+						</tr>
+						<tr>
+						<h4>OBS: Se status vazio, está em processo de análise!</h4>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div layout:include="DialogoConfirmacaoExclusao"></div>
+
+	</div>
+</section>
+</html>

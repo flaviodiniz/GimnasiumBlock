@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+
+<head>
+<title>Cadastro de Requerimento</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST"
+		th:action="@{/requerimentos}" th:object="${requerimento}">
+		<div layout:include="MensagemGeral"></div>
+		<div layout:include="Mensagem"></div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title titulo-right">Novo Requerimento</h1>
+					<a class="btn btn-link link-right"
+						th:href="@{/requerimentos/inicio}">Voltar para o ínicio</a>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<input type="hidden" th:field="*{codigo}" />
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+					<label for="descricao" class="col-sm-2 control-label">Descrição:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="descricao"
+							th:field="*{descricao}" />
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('nome')} ? has-error">
+					<label for="nome" class="col-sm-2 control-label">Nome:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="nome"
+							th:field="*{nome}" />
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('dataCadastro')} ? has-error">
+					<label for="dataCadastro" class="col-sm-2 control-label">Data
+						da Solicitação:</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" placeholder="00/00/0000" id="dataCadastro"
+							th:field="*{dataCadastro}" data-provide="datepicker"
+							data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+							data-date-autoclose="true" data-date-today-highlight="true"
+							data-date-orientation="bottom" />
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('email')} ? has-error">
+					<label for="email" class="col-sm-2 control-label" >E-mail:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+							th:field="*{email}" />
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('cpf')} ? has-error">
+					<label for="cpf" class="col-sm-2 control-label">CPF:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control cpf" id="cpf"  placeholder="000.000.000-00" th:field="*{cpf}" />
+						<small id="cpfHelp" class="form-text text-muted">Apenas números!</small>
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('rg')} ? has-error">
+					<label for="rg" class="col-sm-2 control-label">RG:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control rg" id="rg" th:field="*{rg}" />
+						<small id="rgHelp" class="form-text text-muted">Apenas números!</small>
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('telefone')} ? has-error">
+					<label for="telefone" class="col-sm-2 control-label">Telefone:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control ddd_telefone" id="telefone" placeholder="(00) 00000-0000" th:field="*{telefone}" />
+					<small id="telefoneHelp" class="form-text text-muted">Apenas números!</small>
+					</div>
+				</div>
+
+				<div class="form-group"
+					th:classappend="${#fields.hasErrors('curso')} ? has-error">
+					<label for="curso" class="col-sm-2 control-label">Curso:</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="curso"
+							th:field="*{curso}" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="modalidade" class="col-sm-2 control-label">Modalidade:</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="modalidade"
+							th:field="*{modalidade}">
+							<option th:each="modalidade : ${todasModalidadesRequeridas}"
+								th:value="${modalidade}" th:text="${modalidade.descricao}"></option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-secondary">Continuar</button>
+					</div>
+				</div>
+
+				<nav aria-label="...">
+					<ul class="pagination">
+						<li class="page-item active"><a class="page-link">1</a></li>
+						<li class="page-item"><span class="page-link">2 </span></li>
+						<li class="page-item"><a class="page-link">3</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</div>
+	</form>
+</section>
+</html>

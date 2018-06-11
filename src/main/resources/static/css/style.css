@@ -1,0 +1,39 @@
+@media (min-width: 768px) {
+	.panel-default {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+	
+	.alert {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
+}
+
+.navbar-brand {
+	color:#2163ba;
+	padding-top: 12px;
+	background-color: #1E1C1C;
+}
+
+
+.link-right {
+	float: right;
+	padding: 0px;
+}
+
+.titulo-right {
+	float: left;
+	padding-top: 2px;
+}
+
+div img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-defoult{
+	background-color:#0080FF
+}
+

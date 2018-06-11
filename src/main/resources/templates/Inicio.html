@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorator="LayoutPadrao">
+
+<head>
+	<title>Requerimentos</title>
+</head>
+<section layout:fragment="conteudo">
+    <form class="form-horizontal" method="POST" th:action="@{/requerimentos}" th:object="${requerimento}">
+    	<div class="panel panel-default">
+    		<div class="panel-heading">
+    			<div class="clearfix">
+	   				<h1 class="panel-title titulo-right">Solicitação de hora para utilização do ginásio</h1>
+	   			</div>
+    		</div>
+    		
+    		<div class="panel-body">
+    			<label class="col-sm-2 control-label">Pesquisar:</label>
+    			<a class="btn btn-primary" th:href="@{/requerimentos}">Requerimentos</a>
+    		</div>
+    		
+    		<div class="panel-body">
+    			<label class="col-sm-2 control-label">Solicitar:</label>
+    			<a class="btn btn-primary" th:href="@{/requerimentos/novo}">Novo Requerimento</a>
+    		</div>
+  
+    	</div>
+    	
+    	
+    </form>
+</section>
+
+</html>
