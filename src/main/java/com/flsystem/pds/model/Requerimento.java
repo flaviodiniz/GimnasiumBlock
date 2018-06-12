@@ -73,7 +73,7 @@ public class Requerimento {
 	@Cascade(org.hibernate.annotations.CascadeType.DELETE)
 	private List<Participante> participantes;
 
-	@OneToOne(mappedBy="requerimento")
+	@OneToOne(mappedBy="requerimento", cascade = CascadeType.REMOVE)
 	private Horario horario;
 
 	public Horario getHorario() {
